@@ -13,6 +13,7 @@
     "dev": "fastify start --options -w --debug src/server.js ",
     "prepare": "node .husky/install.js",
     "version": "cz bump",
+    "postgres": "psql -h localhost -U postgres",
     "docker:compose": "docker-compose -f docker-compose.yml up",
     "test:nostop": "cross-env NODE_ENV=test tap --before=test/dockerode/run-before.js \"test/**/*.test.js\" --no-check-coverage"
   },
