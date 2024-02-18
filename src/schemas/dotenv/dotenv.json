@@ -1,17 +1,32 @@
 {
   "type": "object",
   "$id": "schema:dotenv",
+  "required": ["PASSWORD", "USER", "DATABASE", "POSTGRES_PORT"],
   "properties": {
     "NODE_ENV": {
       "type": "string",
       "default": "development"
     },
-    "PORT": {
-      "type": "string",
-      "default": 3000
+    "POSTGRES_PORT": {
+      "type": "number",
+      "default": 5432
     },
     "LOG_LEVEL": {
       "type": "string"
+    },
+    "HOST": {
+      "type": "string",
+      "default": "localhost"
+    },
+    "PASSWORD": {
+      "type": "string"
+    },
+    "DATABASE": {
+      "type": "string"
+    },
+    "USER": {
+      "type": "string",
+      "default": "postgres"
     }
   }
 }
