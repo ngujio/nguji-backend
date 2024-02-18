@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "$id": "schema:dotenv",
+  "properties": {
+    "NODE_ENV": {
+      "type": "string",
+      "default": "development"
+    },
+    "PORT": {
+      "type": "string",
+      "default": 3000
+    },
+    "LOG_LEVEL": {
+      "type": "string"
+    }
+  }
+}
