@@ -20,6 +20,9 @@ dependencies:
   '@fastify/sensible':
     specifier: ^5.0.0
     version: 5.5.0
+  '@nearform/sql':
+    specifier: ^1.10.5
+    version: 1.10.5
   fastify:
     specifier: ^4.26.1
     version: 4.26.1
@@ -363,6 +366,10 @@ packages:
   /@lukeed/ms@2.0.2:
     resolution: {integrity: sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA==}
     engines: {node: '>=8'}
+    dev: false
+
+  /@nearform/sql@1.10.5:
+    resolution: {integrity: sha512-iYIJk3c7WUj4cdApul9xndJeN7DyWx3d6FWWdxq/BeUzEGP5IkxBLyhSV7Nvr7Gc2C2CeUONzyRyPImgG1szpA==}
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
