@@ -8,8 +8,9 @@ CREATE TABLE IF NOT EXISTS products (
     quantity INTEGER NOT NULL,
     unit VARCHAR(20) NOT NULL,
     price NUMERIC(10, 2) NOT NULL,
+    scale INTEGER NOT NULL,
     currency VARCHAR(10) NOT NULL,
-    products_date DATE NOT NULL
+    date DATE NOT NULL
 );
 
 CREATE INDEX product_ix_productID ON products(productID, purchaseID);
@@ -21,7 +22,7 @@ CREATE TABLE IF NOT EXISTS purchases (
     productID VARCHAR(50) REFERENCES products(productID),
     price NUMERIC(10, 2) NOT NULL,
     currency VARCHAR(10) NOT NULL,
-    expensesID VARCHAR(50) REFERENCES expenses(expenseID),
+    expenseID VARCHAR(50) REFERENCES expenses(expenseID),
     supplierID VARCHAR(50) REFERENCES suppliers(email),
     CONSTRAINT purchases_price_is_gt_0 CHECK (price > 0)
 );
@@ -32,12 +33,12 @@ CREATE INDEX purchases_ix_purchaseID ON purchases(purchaseID);
 CREATE TABLE IF NOT EXISTS expenses (
     expenseID VARCHAR(50) UNIQUE PRIMARY KEY,
     purchaseID VARCHAR(50) REFERENCES products(purchaseID),
-    amount NUMERIC(10, 2) NOT NULL,
+    expense_amount NUMERIC(10, 2) NOT NULL,
     expense_type VARCHAR(50) NOT NULL,
     expense_date DATE NOT NULL,
     currency VARCHAR(10) NOT NULL,
     vendorID VARCHAR(50) REFERENCES vendors(email),
-    CONSTRAINT expenses_amount_is_gt_0 CHECK (amount > 0)
+    CONSTRAINT expenses_amount_is_gt_0 CHECK (expense_amount > 0)
 );
 
 CREATE INDEX expenses_ix_expenseID ON expenses(expenseID);
@@ -49,7 +50,6 @@ CREATE TABLE IF NOT EXISTS suppliers (
     mobile VARCHAR(20)
 );
 
-
 -- Create the vendors table
 CREATE TABLE IF NOT EXISTS vendors (
     email VARCHAR(50) UNIQUE PRIMARY KEY,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS vendors (
 
 -- Create the customers table
 CREATE TABLE IF NOT EXISTS customers (
-    email VARCHAR(50)UNIQUE PRIMARY KEY,
+    email VARCHAR(50) UNIQUE PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     mobile VARCHAR(20)
 );
@@ -99,13 +99,13 @@ VALUES
 ('PROD002', 'PUR002', 'Product B', 'Clothing', 'Description of Product B', 50, 'pcs', 25.00, 'USD', '2022-01-02');
 
 -- Insert mock data into the purchases table
-INSERT INTO purchases (purchaseID, purchase_date, productID, price, currency, expensesID, supplierID)
+INSERT INTO purchases (purchaseID, purchase_date, productID, price, currency, expenseID, supplierID)
 VALUES
 ('PUR001', '2022-01-01', 'PROD001', 5000.00, 'USD','EXP001', 'supplier1@example.com'),
 ('PUR002', '2022-01-02', 'PROD002', 1500.00, 'USD','EXP002', 'supplier2@example.com');
 
 -- Insert mock data into the expenses table
-INSERT INTO expenses (expenseID, purchaseID, amount, currency, expense_type, expense_date, vendorID)
+INSERT INTO expenses (expenseID, purchaseID, expense_amount, currency, expense_type, expense_date, vendorID)
 VALUES
 ('EXP001', 'PUR001', 5000.00, 'USD','Operating Expense', '2022-01-01', 'vendor1@example.com'),
 ('EXP002', 'PUR002', 2500.00, 'USD','Operating Expense', '2022-01-02', 'vendor2@example.com');
@@ -144,3 +144,7 @@ INSERT INTO users (email, password, username)
 VALUES
 ('user1@example.com', 'hashed_password_1', 'User 1'),
 ('user2@example.com', 'hashed_password_2', 'User 2');
+
+
+
+
